@@ -1,27 +1,32 @@
 import React, { Dispatch } from 'react'
 import { Action, FormName } from '../reducer';
+import styled from 'styled-components';
 
 interface Props {
   name: keyof FormName;
   value?: string;
   dispatch?: Dispatch<Action>
-  refs?: string | ((instance: HTMLInputElement | null) => void) | React.RefObject<HTMLInputElement> | null | undefined
+  refs?: string | ((instance: HTMLInputElement | null) => void) | React.RefObject<HTMLInputElement> | null | undefined;
+  className?: string;
 }
 
-const Input:React.FC<Props> = React.memo(({ value, name, dispatch, refs }) => (
+const Input:React.FC<Props> = React.memo(props => (
   <input
     type="text"
-    name={name}
-    value={value}
+    name={props.name}
+    value={props.value}
+    className={props.className}
     onChange={(e) => {
-      dispatch && dispatch({
+      props.dispatch && props.dispatch({
         type: "change",
-        name,
+        name: props.name,
         value: e.currentTarget.value
       })
     }}
-    ref={refs}
+    ref={props.refs}
   />
 ), (p,n) => (p.value === n.value))
 
-export default Input
+export default styled(Input)`
+  padding: 8px;
+`

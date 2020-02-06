@@ -4,6 +4,7 @@ export type FormName = {
   tel: string;
   email: string;
   address: string;
+  year?: string;
 }
 
 export const initialState:FormName = {
@@ -23,6 +24,8 @@ export type Action =
 | {
   type: "clear"
 }
+
+export type  Name = keyof FormName;
 
 export type State = {
   values: FormName

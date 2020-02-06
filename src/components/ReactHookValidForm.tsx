@@ -5,8 +5,8 @@ import { initialState, FormName } from '../reducer';
 import styled from 'styled-components';
 import { STYLE_COLOR } from "../const";
 
-const ReactHookValidForm:React.FC<{className?:string}> = props => {
-  const { register, handleSubmit, errors, clearError, watch, setValue } = useForm<FormName>();
+const ReactHookValidForm:React.FC<{className?:string}> = React.memo(props => {
+  const { register, handleSubmit, errors, reset, watch, setValue } = useForm<FormName>();
   const ERROR_TEXT = {
     required: "入力してください",
     kana: "ひらがなで入力してください",
@@ -78,9 +78,10 @@ const ReactHookValidForm:React.FC<{className?:string}> = props => {
           }
         </div>
         <input type="submit" value="送信する"/>
+        <input type="reset" value="reset"/>
       </form>
   </>
-}
+})
 
 export default styled(ReactHookValidForm)`
   .error-text {

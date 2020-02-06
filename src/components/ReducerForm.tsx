@@ -1,10 +1,10 @@
 import React from 'react'
 import Input from './input';
+import Select from './select';
 import { formReducer, initialState, FormName } from '../reducer';
 
 
-const ReducerForm:React.FC = () => {
-  console.log("ReducetrForm render");
+const ReducerForm:React.FC = React.memo(() => {
 
   const [state, dispatch] = React.useReducer(formReducer, {
     values:initialState
@@ -51,6 +51,16 @@ const ReducerForm:React.FC = () => {
       dispatch={dispatch}
     />
     </div>
+    <div className="form">
+      <Select
+        name="year"
+        value="1992"
+      >
+        <option value="1990">1990年</option>
+        <option value="1991">1991年</option>
+        <option value="1992">1992年</option>
+      </Select>
+    </div>
     <div>
       値：
       {
@@ -58,7 +68,16 @@ const ReducerForm:React.FC = () => {
         .map((key) => <li key={key}>{key}: {state.values[key as keyof FormName]}</li>)
       }
     </div>
+    <button
+      onClick={(e) => {
+        dispatch({
+          type:"clear"
+        })
+      }}
+    >
+    全て削除
+    </button>
   </>
-}
+})
 
 export default ReducerForm;

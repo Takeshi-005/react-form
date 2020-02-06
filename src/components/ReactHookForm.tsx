@@ -4,8 +4,7 @@ import Input from './input';
 import { initialState, FormName } from '../reducer';
 
 
-const ReactHookForm:React.FC = () => {
-  console.log("render ReactHookForm");
+const ReactHookForm:React.FC = React.memo(() => {
   const { register, watch } = useForm<FormName>();
   return <>
     react-hook-formを使用
@@ -51,7 +50,8 @@ const ReactHookForm:React.FC = () => {
           .map((key) => <li key={key}>{key}: {watch(key)}</li>)
         }
       </div>
+
   </>
-}
+})
 
 export default ReactHookForm;

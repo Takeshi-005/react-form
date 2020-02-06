@@ -13,7 +13,7 @@ export const initialState:FormName = {
   tel: "",
   email: "",
   address: ""
-} as const
+}
 
 export type Action =
 | {
